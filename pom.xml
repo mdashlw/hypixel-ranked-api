@@ -8,7 +8,7 @@
     <version>2.0.1</version>
     <packaging>jar</packaging>
 
-    <name>ru.mdashlw.hypixel.api hypixel-ranked-api</name>
+    <name>ru.mdashlw.hypixel hypixel-ranked-api</name>
     <description>Hypixel Ranked API wrapper</description>
     <url>https://gitlab.com/mdashlw/hypixel-ranked-api</url>
     <inceptionYear>2019</inceptionYear>
