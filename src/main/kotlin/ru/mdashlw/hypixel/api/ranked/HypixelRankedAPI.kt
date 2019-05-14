@@ -7,8 +7,6 @@ import ru.mdashlw.hypixel.api.ranked.elements.Leaderboard
 import ru.mdashlw.hypixel.api.ranked.elements.Player
 import ru.mdashlw.hypixel.api.ranked.exceptions.HypixelRankedApiException
 import ru.mdashlw.hypixel.api.ranked.reply.Reply
-import ru.mdashlw.hypixel.api.ranked.reply.impl.LeaderboardReply
-import ru.mdashlw.hypixel.api.ranked.reply.impl.PlayerReply
 import ru.mdashlw.hypixel.api.ranked.util.newCall
 import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
@@ -24,11 +22,9 @@ object HypixelRankedAPI {
             .writeTimeout(15, TimeUnit.SECONDS)
             .build()
 
-    fun getPlayerByName(name: String): Player? =
-        get(PlayerReply::class, "player/$name")
+    fun getPlayerByName(name: String): Player? = get("player/$name")
 
-    fun getLeaderboard(): Leaderboard? =
-        get(LeaderboardReply::class, "leaderboard")
+    fun getLeaderboard(): Leaderboard? = get("leaderboard")
 
     fun <R : Reply<T>, T> get(replyClass: KClass<R>, endpoint: String): T? {
         val url = "$BASE_URL$endpoint"
@@ -43,4 +39,6 @@ object HypixelRankedAPI {
             return element
         }
     }
+
+    inline fun <reified R : Reply<T>, T> get(endpoint: String): T? = get(R::class, endpoint)
 }
