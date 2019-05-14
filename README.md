@@ -73,7 +73,50 @@ dependencies {
 
 ## Usage
 
-TODO
+### Methods
+
+#### Getting information about a player
+
+Returns: **Player**.
+
+```kotlin
+HypixelRankedAPI.getPlayerByName("name")
+```
+
+#### Getting leaderboard
+
+Returns: **Leaderboard**.
+
+```kotlin
+HypixelRankedAPI.getLeaderboard()
+```
+
+### Entities
+
+#### Player
+
+Represents a ranked player with rating and position.
+
+|   Property   	| Type 	|
+|:------------:	|:----:	|
+|  **rating**  	|  Int 	|
+| **position** 	|  Int 	|
+
+#### Leaderboard
+
+Represents ranked leaderboard, extends `ArrayList<Leaderboard.Player>`.
+
+##### Player
+
+Represents a player from ranked leaderboard.
+
+|   Property   	|  Type  	|
+|:------------:	|:------:	|
+|   **name**   	| String 	|
+|  **rating**  	|   Int  	|
+| **position** 	|   Int  	|
+|   **wins**   	|   Int  	|
+|   **kills**  	|   Int  	|
 
 ## License
 
