@@ -80,9 +80,14 @@ Also they can enable Cloudflare, so scraper will have to bypass it, therefore an
 
 ## Usage
 
+Base URL:
+https://hypixel-ranked-api.herokuapp.com
+
 ### Methods
 
 #### Getting information about a player
+
+Endpoint: `/player/:nickname`.
 
 Returns: **Player**.
 
@@ -91,6 +96,8 @@ HypixelRankedAPI.getPlayerByName("name")
 ```
 
 #### Getting leaderboard
+
+Endpoint: `/leaderboard`.
 
 Returns: **Leaderboard**.
 
