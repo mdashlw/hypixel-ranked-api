@@ -92,7 +92,7 @@ Endpoint: `/player/:nickname`.
 Returns: **Player**.
 
 ```kotlin
-HypixelRankedAPI.getPlayerByName("name")
+HypixelRankedAPI.getPlayerByName("nickname")
 ```
 
 #### Getting leaderboard
