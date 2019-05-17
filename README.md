@@ -112,9 +112,9 @@ HypixelRankedAPI.getLeaderboard()
 Represents a ranked player with rating and position.
 
 |   Property   	| Type 	| Description 	|
-|:------------:	|:----:	|-------------	|
-|  **rating**  	|  Int 	| Rating      	|
-| **position** 	|  Int 	| Position    	|
+|:------------:	|:----:	|:-----------:	|
+|  **rating**  	|  Int 	|    Rating   	|
+| **position** 	|  Int 	|   Position  	|
 
 #### Leaderboard
 
@@ -125,12 +125,12 @@ Represents ranked leaderboard, extends `ArrayList<Leaderboard.Player>`.
 Represents a player from ranked leaderboard.
 
 |   Property   	|  Type  	| Description 	|
-|:------------:	|:------:	|-------------	|
-|   **name**   	| String 	| Name        	|
-|  **rating**  	|   Int  	| Rating      	|
-| **position** 	|   Int  	| Position    	|
-|   **wins**   	|   Int  	| Wins        	|
-|   **kills**  	|   Int  	| Kills       	|
+|:------------:	|:------:	|:-----------:	|
+|   **name**   	| String 	|     Name    	|
+|  **rating**  	|   Int  	|    Rating   	|
+| **position** 	|   Int  	|   Position  	|
+|   **wins**   	|   Int  	|     Wins    	|
+|   **kills**  	|   Int  	|    Kills    	|
 
 ## License
 
