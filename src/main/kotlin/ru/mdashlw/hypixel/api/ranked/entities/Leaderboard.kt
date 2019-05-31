@@ -1,6 +1,6 @@
-package ru.mdashlw.hypixel.api.ranked.elements
+package ru.mdashlw.hypixel.api.ranked.entities
 
-class Leaderboard : ArrayList<Leaderboard.Player>() {
+class Leaderboard : ArrayList<Player>() {
     data class Player(
         val name: String,
         val rating: Int,

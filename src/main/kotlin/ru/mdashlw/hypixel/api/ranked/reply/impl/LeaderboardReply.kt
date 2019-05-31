@@ -1,6 +1,6 @@
 package ru.mdashlw.hypixel.api.ranked.reply.impl
 
-import ru.mdashlw.hypixel.api.ranked.elements.Leaderboard
+import ru.mdashlw.hypixel.api.ranked.entities.Leaderboard
 import ru.mdashlw.hypixel.api.ranked.reply.Reply
 
 class LeaderboardReply(

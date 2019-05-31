@@ -76,7 +76,7 @@ dependencies {
 Hypixel does not have an API for Ranked, so they only way to get player's rating/position or leaderboard is to scrap their website.
 
 Since it's not meant to be scraped, it doesn't actually care about everyone and it may take awhile to load sometimes.
-Also they can enable Cloudflare, so scraper will have to bypass it, therefore an API can take up to 15s to respond.
+Also Cloudflare can be enabled, so scraper will have to bypass it, therefore an API can take up to 30s to respond.
 
 ## Usage
 
@@ -85,6 +85,8 @@ https://hypixel-ranked-api.herokuapp.com
 
 ### Methods
 
+All return types are nullable.
+
 #### Getting information about a player
 
 Endpoint: `/player/:nickname`.
@@ -92,7 +94,7 @@ Endpoint: `/player/:nickname`.
 Returns: **Player**.
 
 ```kotlin
-HypixelRankedAPI.getPlayerByName("nickname")
+HypixelRankedApi.retrievePlayerByName("nickname")
 ```
 
 #### Getting leaderboard
@@ -102,14 +104,60 @@ Endpoint: `/leaderboard`.
 Returns: **Leaderboard**.
 
 ```kotlin
-HypixelRankedAPI.getLeaderboard()
+HypixelRankedApi.retrieveLeaderboard()
+```
+
+#### Getting seasons
+
+Endpoint: `/seasons`.
+
+Returns: **List<Season>**.
+
+```kotlin
+HypixelRankedApi.retrieveSeasons()
+```
+
+### Extensions
+
+#### HypixelPlayer
+
+##### rankedSeasons
+
+Returns player's seasons. To use this, you must call `HypixelRankedApi.retrieveSeasons()` at least once.
+
+Type: **Map<Season, Pair<Int, Int>>**.
+
+```kotlin
+HypixelPlayer#rankedSeasons
+```
+
+#### SkyWars
+
+##### getRating
+
+Returns rating the player has gotten in this season or 0.
+
+Returns: **Int**.
+
+```kotlin
+SkyWars#getRating(Season)
+```
+
+##### getPosition
+
+Returns position the player has gotten in this season or 0.
+
+Returns: **Int**.
+
+```kotlin
+SkyWars#getPosition(Season)
 ```
 
 ### Entities
 
 #### Player
 
-Represents a ranked player with rating and position.
+Represents a ranked player.
 
 |   Property   |   Type  | Description |
 |:------------:|:-------:|:-----------:|
@@ -134,6 +182,25 @@ Represents a player from ranked leaderboard.
 | **position** |   Int  |   Position  |
 |   **wins**   |   Int  |     Wins    |
 |   **kills**  |   Int  |    Kills    |
+
+##### Season
+
+Represents a ranked season.
+
+|     Property    |      Type     |                                  Description                                 |
+|:---------------:|:-------------:|:----------------------------------------------------------------------------:|
+|    **number**   |      Int      |                           Season number, 1-indexed                           |
+| **hiddenInAPI** |    Boolean    | Indicates whether Hypixel returns rating/position for a player in API or not |
+| **leaderboard** | List\<Player> |                              Stored leaderboard                              |
+
+##### Player
+
+|   Property   |  Type  |   Description  |
+|:------------:|:------:|:--------------:|
+|   **uuid**   | String | UUID, undashed |
+|   **name**   | String |      Name      |
+|  **rating**  |   Int  |     Rating     |
+| **position** |   Int  |    Position    |
 
 ## License
 
