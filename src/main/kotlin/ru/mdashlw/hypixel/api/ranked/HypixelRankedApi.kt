@@ -36,11 +36,18 @@ object HypixelRankedApi {
 
     lateinit var seasons: List<Season>
 
+    val currentSeason: Season
+        get() = findSeasonByDate(LocalDate.now())
+            ?: error("Cannot find the current season")
+
     fun retrievePlayerByName(name: String): Player? = get<PlayerReply, Player>("player/$name")
 
     fun retrieveLeaderboard(): Leaderboard? = get<LeaderboardReply, Leaderboard>("leaderboard")
 
     fun retrieveSeasons(): List<Season>? = get<SeasonsReply, List<Season>>("seasons")?.also { seasons = it }
+
+    fun findSeasonByDate(date: LocalDate): Season? =
+        seasons.find { it.date.year == date.year && it.date.monthValue == date.monthValue }
 
     inline fun <reified R : Reply<T>, T> get(endpoint: String): T? = get(R::class, endpoint)
 
