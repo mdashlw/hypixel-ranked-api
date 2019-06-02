@@ -96,7 +96,8 @@ Endpoint: `/player/:name`.
 Returns: **Player**.
 
 ```kotlin
-HypixelRankedApi.retrievePlayerByName("name")
+HypixelRankedApi.retrievePlayer("name")
+HypixelRankedApi.retrievePlayer("uuid")
 ```
 
 #### Getting leaderboard

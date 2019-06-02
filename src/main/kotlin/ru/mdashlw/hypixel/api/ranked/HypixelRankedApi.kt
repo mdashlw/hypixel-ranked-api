@@ -40,7 +40,7 @@ object HypixelRankedApi {
         get() = findSeasonByDate(LocalDate.now())
             ?: error("Cannot find the current season")
 
-    fun retrievePlayerByName(name: String): Player? = get<PlayerReply, Player>("player/$name")
+    fun retrievePlayer(name: String): Player? = get<PlayerReply, Player>("player/$name")
 
     fun retrieveLeaderboard(): Leaderboard? = get<LeaderboardReply, Leaderboard>("leaderboard")
 
