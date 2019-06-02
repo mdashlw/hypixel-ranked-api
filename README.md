@@ -89,12 +89,14 @@ All return types are nullable.
 
 #### Getting information about a player
 
-Endpoint: `/player/:nickname`.
+You can use an IGN or undashed UUID as the name.
+
+Endpoint: `/player/:name`.
 
 Returns: **Player**.
 
 ```kotlin
-HypixelRankedApi.retrievePlayerByName("nickname")
+HypixelRankedApi.retrievePlayerByName("name")
 ```
 
 #### Getting leaderboard
