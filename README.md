@@ -161,13 +161,14 @@ SkyWars#getPosition(Season)
 
 Represents a ranked player.
 
-|   Property   |   Type  | Description |
-|:------------:|:-------:|:-----------:|
-|   **name**   |  String | Displayname |
-|   **rank**   | String? |     Rank    |
-|   **guild**  | String? |    Guild    |
-|  **rating**  |   Int   |    Rating   |
-| **position** |   Int   |   Position  |
+|   Property   |   Type  |                       Description                       |
+|:------------:|:-------:|:-------------------------------------------------------:|
+|   **uuid**   | ?String | UUID, present only if the endpoint was called with UUID |
+|   **name**   |  String |                       Displayname                       |
+|   **rank**   | String? |                           Rank                          |
+|   **guild**  | String? |                          Guild                          |
+|  **rating**  |   Int   |                          Rating                         |
+| **position** |   Int   |                         Position                        |
 
 #### Leaderboard
 
