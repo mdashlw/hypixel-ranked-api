@@ -2,6 +2,7 @@ package ru.mdashlw.hypixel.api.ranked.entities
 
 class Leaderboard : ArrayList<Leaderboard.Player>() {
     data class Player(
+        val uuid: String,
         val name: String,
         val rating: Int,
         val position: Int,
