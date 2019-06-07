@@ -162,14 +162,14 @@ SkyWars#getPosition(Season)
 
 Represents a ranked player.
 
-|   Property   |   Type  |                       Description                       |
-|:------------:|:-------:|:-------------------------------------------------------:|
-|   **uuid**   | ?String | UUID, present only if the endpoint was called with UUID |
-|   **name**   |  String |                       Displayname                       |
-|   **rank**   | String? |                           Rank                          |
-|   **guild**  | String? |                          Guild                          |
-|  **rating**  |   Int   |                          Rating                         |
-| **position** |   Int   |                         Position                        |
+|   Property   |   Type  |  Description  |
+|:------------:|:-------:|:-------------:|
+|   **uuid**   |  String | Undashed UUID |
+|   **name**   |  String |  Displayname  |
+|   **rank**   | String? |      Rank     |
+|   **guild**  | String? |     Guild     |
+|  **rating**  |   Int   |     Rating    |
+| **position** |   Int   |    Position   |
 
 #### Leaderboard
 
@@ -179,13 +179,14 @@ Represents ranked leaderboard, extends `ArrayList<Leaderboard.Player>`.
 
 Represents a player from ranked leaderboard.
 
-|   Property   |  Type  | Description |
-|:------------:|:------:|:-----------:|
-|   **name**   | String |     Name    |
-|  **rating**  |   Int  |    Rating   |
-| **position** |   Int  |   Position  |
-|   **wins**   |   Int  |     Wins    |
-|   **kills**  |   Int  |    Kills    |
+|   Property   |  Type  |  Description  |
+|:------------:|:------:|:-------------:|
+|   **uuid**   | String | Undashed UUID |
+|   **name**   | String |      Name     |
+|  **rating**  |   Int  |     Rating    |
+| **position** |   Int  |    Position   |
+|   **wins**   |   Int  |      Wins     |
+|   **kills**  |   Int  |     Kills     |
 
 ##### Season
 
@@ -199,12 +200,12 @@ Represents a ranked season.
 
 ##### Player
 
-|   Property   |  Type  |   Description  |
-|:------------:|:------:|:--------------:|
-|   **uuid**   | String | UUID, undashed |
-|   **name**   | String |      Name      |
-|  **rating**  |   Int  |     Rating     |
-| **position** |   Int  |    Position    |
+|   Property   |  Type  |  Description  |
+|:------------:|:------:|:-------------:|
+|   **uuid**   | String | Undashed UUID |
+|   **name**   | String |      Name     |
+|  **rating**  |   Int  |     Rating    |
+| **position** |   Int  |    Position   |
 
 ## License
 
