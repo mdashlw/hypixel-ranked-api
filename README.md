@@ -76,7 +76,8 @@ dependencies {
 Hypixel does not have an API for Ranked, so they only way to get player's rating/position or leaderboard is to scrap their website.
 
 Since it's not meant to be scraped, it doesn't actually care about everyone and it may take awhile to load sometimes.
-Also Cloudflare can be enabled, so scraper will have to bypass it, therefore an API can take up to 35s to respond.
+Also Cloudflare can be enabled, so scraper will have to bypass it, therefore the API can take up to 30 seconds to respond,
+If the request takes more than 30 seconds, you will get 503.
 
 ## Usage
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import ru.mdashlw.hypixel.api.ranked.entities.Leaderboard
 import ru.mdashlw.hypixel.api.ranked.entities.Player
 import ru.mdashlw.hypixel.api.ranked.entities.Season
@@ -24,9 +25,9 @@ object HypixelRankedApi {
 
     private val okHttpClient: OkHttpClient =
         OkHttpClient.Builder()
-            .connectTimeout(35, TimeUnit.SECONDS)
-            .readTimeout(35, TimeUnit.SECONDS)
-            .writeTimeout(35, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     private val jackson: ObjectMapper = jacksonObjectMapper()
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -54,8 +55,9 @@ object HypixelRankedApi {
     fun <R : Reply<T>, T> get(replyClass: KClass<R>, endpoint: String): T? {
         val url = "$BASE_URL$endpoint"
 
-        val response = okHttpClient.newCall(url)
-        val reply = jackson.readValue(response, replyClass.java)
+        val response = okHttpClient.newCall(url).takeIf(Response::isSuccessful) ?: return null
+        val body = response.body()?.string() ?: return null
+        val reply = jackson.readValue(body, replyClass.java)
 
         reply.run {
             if (!success) {
