@@ -25,9 +25,9 @@ object HypixelRankedApi {
 
     private val okHttpClient: OkHttpClient =
         OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(35, TimeUnit.SECONDS)
+            .readTimeout(35, TimeUnit.SECONDS)
+            .writeTimeout(35, TimeUnit.SECONDS)
             .build()
     private val jackson: ObjectMapper = jacksonObjectMapper()
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
