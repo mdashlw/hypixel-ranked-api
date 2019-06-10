@@ -218,9 +218,14 @@ Represents a ranked season.
 |  **rating**  |   Int  |     Rating    |
 | **position** |   Int  |    Position   |
 
-##### Game
+#### Game
 
-...
+|  Property  |  Type  |          Description         |
+|:----------:|:------:|:----------------------------:|
+|  **type**  | String |    Game type, e.g. SkyWars   |
+|  **mode**  | String | Game mode, e.g. RankedInsane |
+|   **map**  | String |              Map             |
+| **winner** | String |            Winner            |
 
 ## License
 
