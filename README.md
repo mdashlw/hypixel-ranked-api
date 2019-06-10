@@ -121,6 +121,16 @@ Returns: **List<Season>**.
 HypixelRankedApi.retrieveSeasons()
 ```
 
+#### Getting game stats
+
+Endpoint: `/game/:id`.
+
+Returns: **Game**.
+
+```kotlin
+HypixelRankedApi.retrieveGame("id")
+```
+
 ### Extensions
 
 #### HypixelPlayer
@@ -189,7 +199,7 @@ Represents a player from ranked leaderboard.
 |   **wins**   |   Int  |      Wins     |
 |   **kills**  |   Int  |     Kills     |
 
-##### Season
+#### Season
 
 Represents a ranked season.
 
@@ -207,6 +217,10 @@ Represents a ranked season.
 |   **name**   | String |      Name     |
 |  **rating**  |   Int  |     Rating    |
 | **position** |   Int  |    Position   |
+
+##### Game
+
+...
 
 ## License
 

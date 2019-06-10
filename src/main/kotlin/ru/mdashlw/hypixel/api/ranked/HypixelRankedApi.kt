@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import ru.mdashlw.hypixel.api.ranked.entities.Game
 import ru.mdashlw.hypixel.api.ranked.entities.Leaderboard
 import ru.mdashlw.hypixel.api.ranked.entities.Player
 import ru.mdashlw.hypixel.api.ranked.entities.Season
 import ru.mdashlw.hypixel.api.ranked.exceptions.HypixelRankedApiException
 import ru.mdashlw.hypixel.api.ranked.reply.Reply
+import ru.mdashlw.hypixel.api.ranked.reply.impl.GameReply
 import ru.mdashlw.hypixel.api.ranked.reply.impl.LeaderboardReply
 import ru.mdashlw.hypixel.api.ranked.reply.impl.PlayerReply
 import ru.mdashlw.hypixel.api.ranked.reply.impl.SeasonsReply
@@ -46,6 +48,8 @@ object HypixelRankedApi {
     fun retrieveLeaderboard() = get<LeaderboardReply, Leaderboard>("leaderboard")
 
     fun retrieveSeasons() = get<SeasonsReply, List<Season>>("seasons")?.also { seasons = it }
+
+    fun retrieveGame(id: String) = get<GameReply, Game>("game/$id")
 
     fun findSeasonByDate(date: LocalDate): Season? =
         seasons.find { it.date.year == date.year && it.date.monthValue == date.monthValue }
