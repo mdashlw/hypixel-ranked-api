@@ -101,7 +101,7 @@ HypixelRankedApi.retrievePlayer("name")
 HypixelRankedApi.retrievePlayer("uuid")
 ```
 
-#### Getting leaderboard
+#### Getting the leaderboard
 
 Endpoint: `/leaderboard`.
 
@@ -121,7 +121,7 @@ Returns: **List<Season>**.
 HypixelRankedApi.retrieveSeasons()
 ```
 
-#### Getting game stats
+#### Getting information about a game
 
 Endpoint: `/game/:id`.
 
@@ -184,11 +184,11 @@ Represents a ranked player.
 
 #### Leaderboard
 
-Represents ranked leaderboard, extends `ArrayList<Leaderboard.Player>`.
+Represents the ranked leaderboard, extends `ArrayList<Leaderboard.Player>`.
 
 ##### Player
 
-Represents a player from ranked leaderboard.
+Represents a player from the leaderboard.
 
 |   Property   |  Type  |  Description  |
 |:------------:|:------:|:-------------:|
@@ -211,6 +211,8 @@ Represents a ranked season.
 
 ##### Player
 
+Represents a player from season's leaderboard.
+
 |   Property   |  Type  |  Description  |
 |:------------:|:------:|:-------------:|
 |   **uuid**   | String | Undashed UUID |
@@ -219,6 +221,8 @@ Represents a ranked season.
 | **position** |   Int  |    Position   |
 
 #### Game
+
+Represents a game stats.
 
 |  Property  |  Type  |          Description         |
 |:----------:|:------:|:----------------------------:|
