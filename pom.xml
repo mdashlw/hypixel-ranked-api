@@ -6,7 +6,7 @@
 
     <groupId>ru.mdashlw.hypixel</groupId>
     <artifactId>hypixel-ranked-api</artifactId>
-    <version>3.4.1</version>
+    <version>3.5.0</version>
     <packaging>jar</packaging>
 
     <name>ru.mdashlw.hypixel hypixel-ranked-api</name>
