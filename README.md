@@ -1,5 +1,5 @@
 [ ![Download](https://api.bintray.com/packages/mdashlw/maven/hypixel-ranked-api/images/download.svg) ](https://bintray.com/mdashlw/maven/hypixel-ranked-api/_latestVersion)
-[![pipeline status](https://gitlab.com/mdashlw/hypixel-ranked-api/badges/master/pipeline.svg)](https://gitlab.com/mdashlw/hypixel-ranked-api/commits/master)
+[![CircleCI](https://circleci.com/gh/mdashlw/hypixel-ranked-api.svg?style=svg)](https://circleci.com/gh/mdashlw/hypixel-ranked-api)
 
 # Hypixel Ranked API
 
@@ -81,8 +81,7 @@ If the request takes more than 30 seconds, you will get 503.
 
 ## Usage
 
-Base URL:
-https://hypixel-ranked-api.herokuapp.com
+Base URL: https://hypixel-ranked-api.herokuapp.com
 
 ### Methods
 
