@@ -3,7 +3,7 @@
 
 # Hypixel Ranked API
 
-Custom Hypixel API for Ranked SkyWars.
+Java Hypixel Ranked API wrapper.
 
 ## Importing
 
@@ -83,152 +83,78 @@ If the request takes more than 30 seconds, you will get 503.
 
 Base URL: https://hypixel-ranked-api.herokuapp.com
 
+### Getting started
+
+```java
+HypixelRankedAPI api = new HypixelRankedAPI();
+HypixelRankedAPI api = new HypixelRankedAPI(new OkHttpClient());
+HypixelRankedAPI api = new HypixelRankedAPI(new OkHttpClient(), new ObjectMapper());
+```
+
 ### Methods
 
-All return types are nullable.
+* All methods return **CompletableFuture**.
+* All UUIDs can be both dashed and undashed.
 
 #### Getting information about a player
 
-You can use an IGN or undashed UUID as the name.
-
 Endpoint: `/player/:name`.
 
-Returns: **Player**.
+Returns: **RankedPlayer** (nullable).
 
-```kotlin
-HypixelRankedApi.retrievePlayer("name")
-HypixelRankedApi.retrievePlayer("uuid")
+```java
+HypixelRankedAPI#retrievePlayer("uuid");
+HypixelRankedAPI#retrievePlayer("nickname");
 ```
 
 #### Getting the leaderboard
 
 Endpoint: `/leaderboard`.
 
-Returns: **Leaderboard**.
+Returns: **List\<LeaderboardPlayer>** (never-null).
 
-```kotlin
-HypixelRankedApi.retrieveLeaderboard()
+```java
+HypixelRankedAPI#retrieveLeaderboard();
 ```
 
 #### Getting seasons
 
 Endpoint: `/seasons`.
 
-Returns: **List<Season>**.
+Returns: **List\<RankedSeason>** (never-null).
 
-```kotlin
-HypixelRankedApi.retrieveSeasons()
+```java
+HypixelRankedAPI#retrieveSeasons();
 ```
 
 #### Getting information about a game
 
 Endpoint: `/game/:id`.
 
-Returns: **Game**.
+Returns: **Game** (nullable).
 
-```kotlin
-HypixelRankedApi.retrieveGame("id")
+```java
+HypixelRankedAPI#retrieveGame("id");
 ```
 
-### Extensions
+### Utils
 
-#### HypixelPlayer
+#### Get rating/position in the season
 
-##### rankedSeasons
+Returns: **int**.
 
-Returns player's seasons. To use this, you must call `HypixelRankedApi.retrieveSeasons()` at least once.
-
-Type: **Map<Season, Pair<Int, Int>>**.
-
-```kotlin
-HypixelPlayer#rankedSeasons
+```java
+HypixelUtil.getRating(SkyWars, RankedSeason);
+HypixelUtil.getPosition(SkyWars, RankedSeason);
 ```
 
-#### SkyWars
+#### Get Ranked seasons of a player
 
-##### getRating
+Returns: **Map\<RankedSeason, RatingPositionEntry>** (never-null).
 
-Returns rating the player has gotten in this season or 0.
-
-Returns: **Int**.
-
-```kotlin
-SkyWars#getRating(Season)
+```java
+HypixelUtil.getSeasons(HypixelRankedAPI, HypixelPlayer);
 ```
-
-##### getPosition
-
-Returns position the player has gotten in this season or 0.
-
-Returns: **Int**.
-
-```kotlin
-SkyWars#getPosition(Season)
-```
-
-### Entities
-
-#### Player
-
-Represents a ranked player.
-
-|   Property   |   Type  |  Description  |
-|:------------:|:-------:|:-------------:|
-|   **uuid**   |  String | Undashed UUID |
-|   **name**   |  String |  Displayname  |
-|   **rank**   | String? |      Rank     |
-|   **guild**  | String? |     Guild     |
-|  **rating**  |   Int   |     Rating    |
-| **position** |   Int   |    Position   |
-
-#### Leaderboard
-
-Represents the ranked leaderboard, extends `ArrayList<Leaderboard.Player>`.
-
-##### Player
-
-Represents a player from the leaderboard.
-
-|   Property   |  Type  |  Description  |
-|:------------:|:------:|:-------------:|
-|   **uuid**   | String | Undashed UUID |
-|   **name**   | String |      Name     |
-|  **rating**  |   Int  |     Rating    |
-| **position** |   Int  |    Position   |
-|   **wins**   |   Int  |      Wins     |
-|   **kills**  |   Int  |     Kills     |
-
-#### Season
-
-Represents a ranked season.
-
-|     Property    |      Type     |                                  Description                                 |
-|:---------------:|:-------------:|:----------------------------------------------------------------------------:|
-|    **number**   |      Int      |                           Season number, 1-indexed                           |
-| **hiddenInAPI** |    Boolean    | Indicates whether Hypixel returns rating/position for a player in API or not |
-| **leaderboard** | List\<Player> |                              Stored leaderboard                              |
-
-##### Player
-
-Represents a player from season's leaderboard.
-
-|   Property   |  Type  |  Description  |
-|:------------:|:------:|:-------------:|
-|   **uuid**   | String | Undashed UUID |
-|   **name**   | String |      Name     |
-|  **rating**  |   Int  |     Rating    |
-| **position** |   Int  |    Position   |
-
-#### Game
-
-Represents a game stats.
-
-|  Property  |  Type  |          Description         |
-|:----------:|:------:|:----------------------------:|
-|  **type**  | String |    Game type, e.g. SkyWars   |
-|  **mode**  | String | Game mode, e.g. RankedInsane |
-|   **map**  | String |              Map             |
-| **winner** | String |            Winner            |
 
 ## License
 
