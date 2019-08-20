@@ -6,12 +6,12 @@ import ru.mdashlw.hypixel.ranked.reply.Reply;
 
 import java.util.List;
 
-public class SeasonsReply extends Reply<List<RankedSeason>> {
+public final class SeasonsReply extends Reply<List<RankedSeason>> {
     @JsonProperty
     private List<RankedSeason> seasons;
 
     @Override
     public List<RankedSeason> getValue() {
-        return seasons;
+        return this.seasons;
     }
 }

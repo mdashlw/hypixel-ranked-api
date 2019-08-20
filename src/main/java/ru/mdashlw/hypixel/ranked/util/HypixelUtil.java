@@ -10,7 +10,7 @@ import ru.mdashlw.hypixel.ranked.entities.RankedSeason;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HypixelUtil {
+public final class HypixelUtil {
     /**
      * Get rating player got in {@code season}.
      * Always 0 for current season.
@@ -19,7 +19,7 @@ public class HypixelUtil {
      * @param season  Season.
      * @return Rating in {@code season} or 0.
      */
-    public static int getRating(SkyWars skyWars, RankedSeason season) {
+    public static int getRating(final SkyWars skyWars, final RankedSeason season) {
         return skyWars.get("SkyWars_skywars_rating_" + season.getHypixelDate() + "_rating", 0, JsonNode::asInt);
     }
 
@@ -31,7 +31,7 @@ public class HypixelUtil {
      * @param season  Season.
      * @return Position in {@code season} or 0.
      */
-    public static int getPosition(SkyWars skyWars, RankedSeason season) {
+    public static int getPosition(final SkyWars skyWars, final RankedSeason season) {
         return skyWars.get("SkyWars_skywars_rating_" + season.getHypixelDate() + "_position", 0, JsonNode::asInt);
     }
 
@@ -43,31 +43,31 @@ public class HypixelUtil {
      * @return Ranked seasons and rating/position entries.
      * @see HypixelRankedAPI#retrieveSeasons()
      */
-    public static Map<RankedSeason, RatingPositionEntry> getSeasons(HypixelRankedAPI api, HypixelPlayer player) {
-        Map<RankedSeason, RatingPositionEntry> seasons = new HashMap<>();
-        String uuid = player.getUuid();
-        Stats stats = player.getStats();
-        SkyWars skyWars = stats == null ? null : stats.getSkyWars();
+    public static Map<RankedSeason, RatingPositionEntry> getSeasons(final HypixelRankedAPI api, final HypixelPlayer player) {
+        final Map<RankedSeason, RatingPositionEntry> seasons = new HashMap<>();
+        final String uuid = player.getUuid();
+        final Stats stats = player.getStats();
+        final SkyWars skyWars = stats == null ? null : stats.getSkyWars();
 
-        for (RankedSeason season : api.getSeasons()) {
+        for (final RankedSeason season : api.getSeasons()) {
             if (season.isHiddenInAPI()) {
                 if (!season.hasLeaderboard()) {
                     continue;
                 }
 
-                for (RankedSeason.LeaderboardPlayer leaderboardPlayer : season.getLeaderboard()) {
+                for (final RankedSeason.LeaderboardPlayer leaderboardPlayer : season.getLeaderboard()) {
                     if (!leaderboardPlayer.getUuid().equals(uuid)) {
                         continue;
                     }
 
-                    int rating = leaderboardPlayer.getRating();
-                    int position = leaderboardPlayer.getPosition();
+                    final int rating = leaderboardPlayer.getRating();
+                    final int position = leaderboardPlayer.getPosition();
 
                     seasons.put(season, new RatingPositionEntry(rating, position));
                 }
             } else if (skyWars != null) {
-                int rating = getRating(skyWars, season);
-                int position = getPosition(skyWars, season);
+                final int rating = getRating(skyWars, season);
+                final int position = getPosition(skyWars, season);
 
                 if (rating == 0 || position == 0) {
                     continue;

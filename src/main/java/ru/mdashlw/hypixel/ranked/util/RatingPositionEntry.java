@@ -1,10 +1,10 @@
 package ru.mdashlw.hypixel.ranked.util;
 
-public class RatingPositionEntry {
-    private int rating;
-    private int position;
+public final class RatingPositionEntry {
+    private final int rating;
+    private final int position;
 
-    public RatingPositionEntry(int rating, int position) {
+    public RatingPositionEntry(final int rating, final int position) {
         this.rating = rating;
         this.position = position;
     }
@@ -15,7 +15,7 @@ public class RatingPositionEntry {
      * @return Stored rating.
      */
     public int getRating() {
-        return rating;
+        return this.rating;
     }
 
     /**
@@ -24,6 +24,6 @@ public class RatingPositionEntry {
      * @return Stored position.
      */
     public int getPosition() {
-        return position;
+        return this.position;
     }
 }

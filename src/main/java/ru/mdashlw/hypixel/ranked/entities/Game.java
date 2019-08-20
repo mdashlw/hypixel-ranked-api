@@ -3,7 +3,7 @@ package ru.mdashlw.hypixel.ranked.entities;
 /**
  * Network game stats.
  */
-public class Game {
+public final class Game {
     private String type;
     private String mode;
     private String map;
@@ -15,7 +15,7 @@ public class Game {
      * @return Game type.
      */
     public String getType() {
-        return type;
+        return this.type;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Game {
      * @return Game mode.
      */
     public String getMode() {
-        return mode;
+        return this.mode;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Game {
      * @return Game map.
      */
     public String getMap() {
-        return map;
+        return this.map;
     }
 
     /**
@@ -42,6 +42,6 @@ public class Game {
      * @return Game winner.
      */
     public String getWinner() {
-        return winner;
+        return this.winner;
     }
 }

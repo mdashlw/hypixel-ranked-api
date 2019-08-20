@@ -3,7 +3,7 @@ package ru.mdashlw.hypixel.ranked.entities;
 /**
  * Ranked leaderboard player.
  */
-public class LeaderboardPlayer {
+public final class LeaderboardPlayer {
     private String uuid;
     private String name;
     private int rating;
@@ -17,7 +17,7 @@ public class LeaderboardPlayer {
      * @return Undashed UUID.
      */
     public String getUuid() {
-        return uuid;
+        return this.uuid;
     }
 
     /**
@@ -26,7 +26,7 @@ public class LeaderboardPlayer {
      * @return Player name.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -35,7 +35,7 @@ public class LeaderboardPlayer {
      * @return Rating.
      */
     public int getRating() {
-        return rating;
+        return this.rating;
     }
 
     /**
@@ -44,7 +44,7 @@ public class LeaderboardPlayer {
      * @return Position.
      */
     public int getPosition() {
-        return position;
+        return this.position;
     }
 
     /**
@@ -53,7 +53,7 @@ public class LeaderboardPlayer {
      * @return Ranked wins.
      */
     public int getWins() {
-        return wins;
+        return this.wins;
     }
 
     /**
@@ -62,6 +62,6 @@ public class LeaderboardPlayer {
      * @return Ranked kills.
      */
     public int getKills() {
-        return kills;
+        return this.kills;
     }
 }

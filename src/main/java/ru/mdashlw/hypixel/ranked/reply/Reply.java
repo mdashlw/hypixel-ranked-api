@@ -3,19 +3,14 @@ package ru.mdashlw.hypixel.ranked.reply;
 public abstract class Reply<T> {
     private boolean success;
     private String cause;
-    private boolean throttle;
 
     public abstract T getValue();
 
-    public boolean isSuccess() {
-        return success;
+    public final boolean isSuccess() {
+        return this.success;
     }
 
-    public String getCause() {
-        return cause;
-    }
-
-    public boolean isThrottle() {
-        return throttle;
+    public final String getCause() {
+        return this.cause;
     }
 }

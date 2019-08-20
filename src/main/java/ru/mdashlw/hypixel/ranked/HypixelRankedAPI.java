@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Hypixel Ranked API.
  */
-public class HypixelRankedAPI {
+public final class HypixelRankedAPI {
     /**
      * Base URL for the Hypixel Ranked API.
      */
@@ -40,8 +40,8 @@ public class HypixelRankedAPI {
      */
     public static final DateTimeFormatter HYPIXEL_DATE_FORMATTER = DateTimeFormatter.ofPattern("M_yy");
 
-    private OkHttpClient okHttpClient;
-    private ObjectMapper objectMapper;
+    private final OkHttpClient okHttpClient;
+    private final ObjectMapper objectMapper;
 
     private List<RankedSeason> seasons = Collections.emptyList();
 
@@ -56,7 +56,7 @@ public class HypixelRankedAPI {
     /**
      * @param okHttpClient OkHttpClient instance.
      */
-    public HypixelRankedAPI(OkHttpClient okHttpClient) {
+    public HypixelRankedAPI(final OkHttpClient okHttpClient) {
         this(okHttpClient, new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false));
     }
@@ -65,7 +65,7 @@ public class HypixelRankedAPI {
      * @param okHttpClient OkHttpClient instance.
      * @param objectMapper ObjectMapper instance.
      */
-    public HypixelRankedAPI(OkHttpClient okHttpClient, ObjectMapper objectMapper) {
+    public HypixelRankedAPI(final OkHttpClient okHttpClient, final ObjectMapper objectMapper) {
         this.okHttpClient = okHttpClient;
         this.objectMapper = objectMapper;
     }
@@ -76,8 +76,8 @@ public class HypixelRankedAPI {
      * @param name Name or UUID.
      * @return Completable future of RankedPlayer.
      */
-    public CompletableFuture<RankedPlayer> retrievePlayer(String name) {
-        return retrieve(PlayerReply.class, "player/" + name);
+    public CompletableFuture<RankedPlayer> retrievePlayer(final String name) {
+        return this.retrieve(PlayerReply.class, "player/" + name);
     }
 
     /**
@@ -86,7 +86,7 @@ public class HypixelRankedAPI {
      * @return Completable future of List of LeaderboardPlayer.
      */
     public CompletableFuture<List<LeaderboardPlayer>> retrieveLeaderboard() {
-        return retrieve(LeaderboardReply.class, "leaderboard");
+        return this.retrieve(LeaderboardReply.class, "leaderboard");
     }
 
     /**
@@ -96,7 +96,7 @@ public class HypixelRankedAPI {
      * @return Completable future of List of RankedSeason.
      */
     public CompletableFuture<List<RankedSeason>> retrieveSeasons() {
-        return retrieve(SeasonsReply.class, "seasons")
+        return this.retrieve(SeasonsReply.class, "seasons")
                 .thenApply(seasons -> {
                     this.seasons = seasons;
                     return seasons;
@@ -109,26 +109,26 @@ public class HypixelRankedAPI {
      * @param id Game id.
      * @return Completable future of Game.
      */
-    public CompletableFuture<Game> retrieveGame(String id) {
-        return retrieve(GameReply.class, "game/" + id);
+    public CompletableFuture<Game> retrieveGame(final String id) {
+        return this.retrieve(GameReply.class, "game/" + id);
     }
 
-    private <T> CompletableFuture<T> retrieve(Class<? extends Reply<T>> clazz, String endpoint) {
-        String url = BASE_URL + endpoint;
-        CompletableFuture<T> future = new CompletableFuture<>();
-        Request request = new Request.Builder()
+    private <T> CompletableFuture<T> retrieve(final Class<? extends Reply<T>> clazz, final String endpoint) {
+        final String url = BASE_URL + endpoint;
+        final CompletableFuture<T> future = new CompletableFuture<>();
+        final Request request = new Request.Builder()
                 .url(url)
                 .build();
 
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        this.okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(final Call call, final IOException e) {
                 future.completeExceptionally(e);
             }
 
             @Override
-            public void onResponse(Call call, Response response) {
-                ResponseBody body = response.body();
+            public void onResponse(final Call call, final Response response) {
+                final ResponseBody body = response.body();
 
                 // Body is never null in Callback#onResponse.
                 if (body == null) {
@@ -141,15 +141,15 @@ public class HypixelRankedAPI {
                 // and we will get a json parse exception.
                 if (!response.isSuccessful()) {
                     body.close();
-                    future.completeExceptionally(new IllegalStateException("Response was not successful"));
+                    future.completeExceptionally(new IllegalStateException("Response was not successful, status code: " + response.code()));
                     return;
                 }
 
-                Reply<T> reply;
+                final Reply<T> reply;
 
                 try {
-                    reply = objectMapper.readValue(body.string(), clazz);
-                } catch (IOException exception) {
+                    reply = HypixelRankedAPI.this.objectMapper.readValue(body.string(), clazz);
+                } catch (final IOException exception) {
                     future.completeExceptionally(exception);
                     return;
                 }
@@ -172,9 +172,9 @@ public class HypixelRankedAPI {
      * @param date Date.
      * @return Season with {@code date}.
      */
-    public RankedSeason getSeasonByDate(LocalDate date) {
-        for (RankedSeason season : seasons) {
-            LocalDate seasonDate = season.getDate();
+    public RankedSeason getSeasonByDate(final LocalDate date) {
+        for (final RankedSeason season : this.seasons) {
+            final LocalDate seasonDate = season.getDate();
 
             if (seasonDate.getYear() == date.getYear() && seasonDate.getMonthValue() == date.getMonthValue()) {
                 return season;
@@ -190,7 +190,7 @@ public class HypixelRankedAPI {
      * @return Current Ranked season.
      */
     public RankedSeason getCurrentSeason() {
-        RankedSeason season = getSeasonByDate(LocalDate.now());
+        final RankedSeason season = this.getSeasonByDate(LocalDate.now());
 
         if (season == null) {
             throw new IllegalStateException("Couldn't find the current season");
@@ -206,6 +206,6 @@ public class HypixelRankedAPI {
      * @see HypixelRankedAPI#retrieveSeasons()
      */
     public List<RankedSeason> getSeasons() {
-        return seasons;
+        return this.seasons;
     }
 }

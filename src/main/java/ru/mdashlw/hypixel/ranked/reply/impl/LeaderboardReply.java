@@ -6,12 +6,12 @@ import ru.mdashlw.hypixel.ranked.reply.Reply;
 
 import java.util.List;
 
-public class LeaderboardReply extends Reply<List<LeaderboardPlayer>> {
+public final class LeaderboardReply extends Reply<List<LeaderboardPlayer>> {
     @JsonProperty
     private List<LeaderboardPlayer> leaderboard;
 
     @Override
     public List<LeaderboardPlayer> getValue() {
-        return leaderboard;
+        return this.leaderboard;
     }
 }

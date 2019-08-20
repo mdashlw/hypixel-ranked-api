@@ -10,16 +10,16 @@ import java.util.*;
 /**
  * Ranked season.
  */
-public class RankedSeason {
-    private int number;
+public final class RankedSeason {
+    private final int number;
     private List<LeaderboardPlayer> leaderboard;
     private boolean hiddenInAPI;
 
-    public RankedSeason(int number) {
+    public RankedSeason(final int number) {
         this.number = number;
     }
 
-    public RankedSeason(@JsonProperty("number") int number, @JsonProperty("leaderboard") List<LeaderboardPlayer> leaderboard, @JsonProperty("hiddenInAPI") boolean hiddenInAPI) {
+    public RankedSeason(@JsonProperty("number") final int number, @JsonProperty("leaderboard") final List<LeaderboardPlayer> leaderboard, @JsonProperty("hiddenInAPI") final boolean hiddenInAPI) {
         this.number = number;
         this.leaderboard = leaderboard;
         this.hiddenInAPI = hiddenInAPI;
@@ -31,7 +31,7 @@ public class RankedSeason {
      * @return Does this season have leaderboard.
      */
     public boolean hasLeaderboard() {
-        return leaderboard != null;
+        return this.leaderboard != null;
     }
 
     /**
@@ -40,7 +40,7 @@ public class RankedSeason {
      * @return Date of this season.
      */
     public LocalDate getDate() {
-        return HypixelRankedAPI.FIRST_SEASON_DATE.plusMonths(number - 1);
+        return HypixelRankedAPI.FIRST_SEASON_DATE.plusMonths(this.number - 1);
     }
 
     /**
@@ -49,7 +49,7 @@ public class RankedSeason {
      * @return Hypixel-style date of this season.
      */
     public String getHypixelDate() {
-        return HypixelRankedAPI.HYPIXEL_DATE_FORMATTER.format(getDate());
+        return HypixelRankedAPI.HYPIXEL_DATE_FORMATTER.format(this.getDate());
     }
 
     /**
@@ -58,31 +58,31 @@ public class RankedSeason {
      * @return Ranked rewards for this season.
      */
     public Map<SkyWars.RankedDivision, List<SkyWars.RankedReward>> getRewards() {
-        Map<SkyWars.RankedDivision, List<SkyWars.RankedReward>> rewards = new HashMap<>();
-        List<SkyWars.RankedReward> mastersRewards = SkyWars.RankedDivision.MASTERS.getRewards();
-        List<SkyWars.RankedReward> diamondRewards = SkyWars.RankedDivision.DIAMOND.getRewards();
-        List<SkyWars.RankedReward> goldRewards = SkyWars.RankedDivision.GOLD.getRewards();
+        final Map<SkyWars.RankedDivision, List<SkyWars.RankedReward>> rewards = new EnumMap<>(SkyWars.RankedDivision.class);
+        final List<SkyWars.RankedReward> mastersRewards = SkyWars.RankedDivision.MASTERS.getRewards();
+        final List<SkyWars.RankedReward> diamondRewards = SkyWars.RankedDivision.DIAMOND.getRewards();
+        final List<SkyWars.RankedReward> goldRewards = SkyWars.RankedDivision.GOLD.getRewards();
 
         {
-            List<SkyWars.RankedReward> rewardList = new ArrayList<>();
+            final List<SkyWars.RankedReward> rewardList = new ArrayList<>();
 
             rewardList.add(SkyWars.RankedReward.DRAGON_RIDER);
-            rewardList.add(mastersRewards.get(number % 2));
+            rewardList.add(mastersRewards.get(this.number % 2));
 
             rewards.put(SkyWars.RankedDivision.MASTERS, rewardList);
         }
 
         {
-            List<SkyWars.RankedReward> rewardList = new ArrayList<>();
+            final List<SkyWars.RankedReward> rewardList = new ArrayList<>();
 
             rewardList.add(SkyWars.RankedReward.MAGIC_BOX);
-            rewardList.add(diamondRewards.get(number % 3));
-            rewardList.add(diamondRewards.get(number % 4 + 3));
+            rewardList.add(diamondRewards.get(this.number % 3));
+            rewardList.add(diamondRewards.get(this.number % 4 + 3));
 
             rewards.put(SkyWars.RankedDivision.DIAMOND, rewardList);
         }
 
-        rewards.put(SkyWars.RankedDivision.GOLD, Collections.singletonList(goldRewards.get(number % 3)));
+        rewards.put(SkyWars.RankedDivision.GOLD, Collections.singletonList(goldRewards.get(this.number % 3)));
 
         return rewards;
     }
@@ -93,7 +93,7 @@ public class RankedSeason {
      * @return Season number.
      */
     public int getNumber() {
-        return number;
+        return this.number;
     }
 
     /**
@@ -102,7 +102,7 @@ public class RankedSeason {
      * @return Stored season leaderboard.
      */
     public List<LeaderboardPlayer> getLeaderboard() {
-        return leaderboard;
+        return this.leaderboard;
     }
 
     /**
@@ -112,13 +112,13 @@ public class RankedSeason {
      * @return Are rating/position hidden for this season.
      */
     public boolean isHiddenInAPI() {
-        return hiddenInAPI;
+        return this.hiddenInAPI;
     }
 
     /**
      * Leaderboard player.
      */
-    public static class LeaderboardPlayer {
+    public static final class LeaderboardPlayer {
         private String uuid;
         private String name;
         private int rating;
@@ -130,7 +130,7 @@ public class RankedSeason {
          * @return Undashed UUID.
          */
         public String getUuid() {
-            return uuid;
+            return this.uuid;
         }
 
         /**
@@ -139,7 +139,7 @@ public class RankedSeason {
          * @return Player name.
          */
         public String getName() {
-            return name;
+            return this.name;
         }
 
         /**
@@ -148,7 +148,7 @@ public class RankedSeason {
          * @return Rating.
          */
         public int getRating() {
-            return rating;
+            return this.rating;
         }
 
         /**
@@ -157,7 +157,7 @@ public class RankedSeason {
          * @return Position.
          */
         public int getPosition() {
-            return position;
+            return this.position;
         }
     }
 }
