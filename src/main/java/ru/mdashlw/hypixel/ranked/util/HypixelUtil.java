@@ -47,33 +47,27 @@ public final class HypixelUtil {
         final Map<RankedSeason, RatingPositionEntry> seasons = new HashMap<>();
         final String uuid = player.getUuid();
         final Stats stats = player.getStats();
-        final SkyWars skyWars = stats == null ? null : stats.getSkyWars();
+        final SkyWars skyWars = stats != null ? stats.getSkyWars() : null;
 
         for (final RankedSeason season : api.getSeasons()) {
             if (season.isHiddenInAPI()) {
-                if (!season.hasLeaderboard()) {
-                    continue;
-                }
+                if (season.hasLeaderboard()) {
+                    for (final RankedSeason.LeaderboardPlayer leaderboardPlayer : season.getLeaderboard()) {
+                        if (leaderboardPlayer.getUuid().equals(uuid)) {
+                            final int rating = leaderboardPlayer.getRating();
+                            final int position = leaderboardPlayer.getPosition();
 
-                for (final RankedSeason.LeaderboardPlayer leaderboardPlayer : season.getLeaderboard()) {
-                    if (!leaderboardPlayer.getUuid().equals(uuid)) {
-                        continue;
+                            seasons.put(season, new RatingPositionEntry(rating, position));
+                        }
                     }
-
-                    final int rating = leaderboardPlayer.getRating();
-                    final int position = leaderboardPlayer.getPosition();
-
-                    seasons.put(season, new RatingPositionEntry(rating, position));
                 }
             } else if (skyWars != null) {
                 final int rating = getRating(skyWars, season);
                 final int position = getPosition(skyWars, season);
 
-                if (rating == 0 || position == 0) {
-                    continue;
+                if (rating != 0 && position != 0) {
+                    seasons.put(season, new RatingPositionEntry(rating, position));
                 }
-
-                seasons.put(season, new RatingPositionEntry(rating, position));
             }
         }
 
